@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function App() {
+  const url = 'api.openweathermap.org/data/2.5/'
+  const api_key = '47426df0e4d2962b6e7b3873fb8ec359'
+  const [latitude, setLatitude] = useState('')
+  const [longitude, setLongitude] = useState('')
+  const [data, setData] = useState('')
+  useEffect(()=>{
+    const fetchData = async()=>{
+      navigator.geolocation.getCurrentPosition((pos)=>{
+        setLatitude(pos.coords.latitude)
+        setLongitude(pos.coords.longitude)
+      })
+      await axios.get(`https://${url}weather/?lat=${latitude}&lon=${longitude}&units=metric&APPID=${api_key}`).then(
+          res=>setData(JSON.stringify(res.data))
+        ).catch(err=>console.log(err.message))
+    }
+    fetchData()
+    console.log('latitude',latitude)
+    console.log('longitude',longitude)
+  },[latitude,longitude])
+  console.log(data)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Weather</h1>
+      <div>
+        <div>
+          <p>{data.slice(73,105)}</p>
+          <p>{data.slice(138,228)}</p>
+          <p>{data.slice(490,504)}</p>
+          <p>{data}</p>
+          <p>{data.length}</p>
+        </div>
+      </div>
     </div>
   );
 }
