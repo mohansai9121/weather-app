@@ -79,20 +79,24 @@ function App() {
                     <img
                       src={weather}
                       alt="weather condition"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
+                    <br />
+                    Weather Condition:
                     <h3>{currentLoc_weather}</h3>
                   </div>
                   <div className="card">
                     <img
                       src={temperature}
                       alt="Temperature"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
+                    <br />
+                    Temperature:
                     <h3>
                       {currentLoc_temp}
                       <sup>o</sup>C
@@ -102,8 +106,8 @@ function App() {
                     <img
                       src={humidity}
                       alt="Humidity"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
                     <br />
@@ -114,10 +118,12 @@ function App() {
                     <img
                       src={wind}
                       alt="Wind Speed"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
+                    <br />
+                    Wind Speed:
                     <h3>{currentLoc_wind} km/hr</h3>
                   </div>
                 </div>

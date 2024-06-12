@@ -82,20 +82,24 @@ const CityWeather = () => {
                     <img
                       src={weather}
                       alt="weather"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
+                    <br />
+                    Weather Condition:
                     <h3>{cityWeather}</h3>
                   </div>
                   <div className="card">
                     <img
                       src={temperature}
                       alt="Temperature"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
+                    <br />
+                    Temperature:
                     <h3>
                       {Math.round(cityTemp - 273.15)} <sup>o</sup>C
                     </h3>
@@ -104,8 +108,8 @@ const CityWeather = () => {
                     <img
                       src={humidity}
                       alt="Humidity"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
                     <br />
@@ -115,10 +119,12 @@ const CityWeather = () => {
                     <img
                       src={wind}
                       alt="Wind Speed"
-                      height={180}
-                      width={150}
+                      height={170}
+                      width={135}
                       style={{ borderRadius: "5px" }}
                     />
+                    <br />
+                    Wind Speed:
                     <h3>{cityWind} km/hr</h3>
                   </div>
                 </div>
@@ -133,7 +139,7 @@ const CityWeather = () => {
           <div>
             {isCity === false ? (
               <div>
-                <h2>No such city exists</h2>
+                <h2>{`There is no city named:${city}`}</h2>
               </div>
             ) : (
               ""

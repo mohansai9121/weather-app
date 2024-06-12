@@ -45,7 +45,6 @@
   font-weight: 500;
   border-radius: 9px;
   padding: 2%;
-  margin: 10px;
   transition: 0.5s;
 }
 .card:hover, .card:focus{
