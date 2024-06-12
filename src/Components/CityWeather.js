@@ -1,57 +1,148 @@
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState } from "react";
+import axios from "axios";
+import { Rings } from "react-loader-spinner";
+import weather from "../assets/weather.png";
+import temperature from "../assets/temperature.jpg";
+import humidity from "../assets/humidity.jpg";
+import wind from "../assets/windSpeed.jpg";
+import "../App.css";
 
 const CityWeather = () => {
-    const url = 'https://api.openweathermap.org/data/2.5/'
-    const api_key = '47426df0e4d2962b6e7b3873fb8ec359'
-    const [city, setCity] = useState('')
-    const [data, setData] = useState('')
-    const [ cityWeather, setCityWeather ] = useState('')
-    const [ cityName, setCityName ] = useState('')
-    const [ cityTemp, setCityTemp ] = useState('')
-    const [ cityHumidity, setCityHumidity ] = useState('')
-    const [ cityWind, setCityWind ] = useState('')
-    const [isCity, setIsCity] = useState(null)
+  const url = "https://api.openweathermap.org/data/2.5/";
+  const api_key = "47426df0e4d2962b6e7b3873fb8ec359";
+  const [city, setCity] = useState("");
+  const [data, setData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [cityWeather, setCityWeather] = useState("");
+  const [cityName, setCityName] = useState("");
+  const [cityTemp, setCityTemp] = useState("");
+  const [cityHumidity, setCityHumidity] = useState("");
+  const [cityWind, setCityWind] = useState("");
+  const [isCity, setIsCity] = useState(null);
 
-    const submitHandler = async (e)=>{
-        e.preventDefault()
-        await axios.get(`${url}weather?q=${city}&appid=${api_key}`).then(
-            res=>{
-                setIsCity(true)
-                setData(JSON.stringify(res.data))
-                setCityWeather(JSON.stringify(res.data.weather[0].description))
-                setCityName(JSON.stringify(res.data.name))
-                setCityTemp(JSON.stringify(res.data.main.temp))
-                setCityHumidity(JSON.stringify(res.data.main.humidity))
-                setCityWind(JSON.stringify(res.data.wind.speed))
-            }
-        ).catch(err=>{
-            setIsCity(false)    
-            console.log(err.message)
-        })
-    }
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    await axios
+      .get(`${url}weather?q=${city}&appid=${api_key}`)
+      .then((res) => {
+        setIsCity(true);
+        setData(JSON.stringify(res.data));
+        setCityWeather(JSON.stringify(res.data.weather[0].description));
+        setCityName(JSON.stringify(res.data.name));
+        setCityTemp(JSON.stringify(res.data.main.temp));
+        setCityHumidity(JSON.stringify(res.data.main.humidity));
+        setCityWind(JSON.stringify(res.data.wind.speed));
+      })
+      .catch((err) => {
+        setIsCity(false);
+        console.log(err.message);
+      });
+    setIsLoading(false);
+  };
 
-    console.log(city)
-    console.log(data)
+  console.log(city);
+  console.log(data);
 
   return (
-    <div>
-      <div>
-        <form onSubmit={submitHandler}>
-            <input type='text' value={city} onChange={e=>setCity(e.target.value)} placeholder='Enter City Name...' />
-            <input type='submit' value='search'/>
-        </form>
-      </div>
-      <div>{isCity===true?<div><br/>
-      <p>Weather Condition:{cityWeather}</p>
-      <p>City Name:{cityName}</p>
-      <p>Temperature:{Math.round(cityTemp-273.15)} <sup>o</sup>C</p>
-      <p>Humidity:{cityHumidity}</p>
-      <p>Wind Speed:{cityWind} km/hr</p>
-      </div>:''}</div>
-      <div>{isCity===false?<div><p>No such city exists</p></div>:''}</div>
+    <div className="cityWeather">
+      {isLoading ? (
+        <Rings
+          visible={true}
+          height="80"
+          width="80"
+          color="#E8E8E8"
+          ariaLabel="rings-loading"
+          wrapperStyle={{}}
+          wrapperClass="loader"
+        />
+      ) : (
+        <div>
+          <h2 className="heading2">Predict current Weather for any City </h2>
+          <div>
+            <form onSubmit={submitHandler}>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Enter City Name..."
+                className="input"
+              />
+              <input type="submit" value="search" className="button" />
+            </form>
+          </div>
+          <div>
+            {isCity === true ? (
+              <div>
+                <center>
+                  <h2>{cityName}</h2>
+                </center>
+                <div className="grid">
+                  <div className="card">
+                    <img
+                      src={weather}
+                      alt="weather"
+                      height={180}
+                      width={150}
+                      style={{ borderRadius: "5px" }}
+                    />
+                    <h3>{cityWeather}</h3>
+                  </div>
+                  <div className="card">
+                    <img
+                      src={temperature}
+                      alt="Temperature"
+                      height={180}
+                      width={150}
+                      style={{ borderRadius: "5px" }}
+                    />
+                    <h3>
+                      {Math.round(cityTemp - 273.15)} <sup>o</sup>C
+                    </h3>
+                  </div>
+                  <div className="card">
+                    <img
+                      src={humidity}
+                      alt="Humidity"
+                      height={180}
+                      width={150}
+                      style={{ borderRadius: "5px" }}
+                    />
+                    <br />
+                    Humidity:<h3>{cityHumidity}</h3>
+                  </div>
+                  <div className="card">
+                    <img
+                      src={wind}
+                      alt="Wind Speed"
+                      height={180}
+                      width={150}
+                      style={{ borderRadius: "5px" }}
+                    />
+                    <h3>{cityWind} km/hr</h3>
+                  </div>
+                </div>
+                <br />
+                <br />
+                <br />
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+          <div>
+            {isCity === false ? (
+              <div>
+                <h2>No such city exists</h2>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default CityWeather
+export default CityWeather;

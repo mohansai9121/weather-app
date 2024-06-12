@@ -1,3 +1,84 @@
 .App {
   text-align: center;
 }
+.loader{
+  margin-left: 35%;
+}
+.heading1{
+  font-size: 40px;
+  font-weight: 800;
+  font-family: serif;
+  background-clip: text;
+  background: linear-gradient(to right, #EFE929, brown);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 5%;
+}
+.heading2{
+  font-size: 40px;
+  font-weight: 700;
+  font-family: serif;
+  background: linear-gradient(to left, #DFEBD9, white);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 2%;
+}
+.current-location{
+  margin: 0px;
+  background: linear-gradient(to left, skyblue,blue);
+  padding: 2%;
+}
+.cityWeather{
+  margin: 0px;
+  background: linear-gradient(to left, #ED9A09, brown);
+  padding: 3%;
+}
+.cloud{
+  scale: 4;
+}
+.card{
+  border: 3px solid gainsboro;
+  background-color: black;
+  font-size: 100;
+  color: antiquewhite;
+  font-weight: 500;
+  border-radius: 9px;
+  padding: 2%;
+  margin: 10px;
+  transition: 0.5s;
+}
+.card:hover, .card:focus{
+  box-shadow: 0px 0px 7px white;
+}
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
+}
+.input{
+  width:220px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: black;
+  border: 0.5px solid white;
+  margin: 3px;
+  font-size: large;
+  font-weight: 500;
+  color: aliceblue;
+}
+.button{
+  border: 0.3px solid white;
+  color: black;
+  padding: 5px;
+  font-size: 18px;
+  margin: 3px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.button:hover, .button:focus{
+  scale: 1.1;
+  box-shadow: 0px 0px 4px white;
+  background-color: white
+
+}
